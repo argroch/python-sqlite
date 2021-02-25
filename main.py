@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 # method to establish a connection to our database
 # will create database file if none exists
@@ -20,12 +21,24 @@ def create_table(db):
 # method to add to the table we created in the database
 # it takes the database and the table name as arguments
 def add_to_table(db, table):
+	empId = table_size(db) + 1
+	name = input("Employee name: ")
+	salary = input("Salary: ")
+	dept = input("Department: ")
+	position = input("Position: ")
+	hireDate = input("Hire date (yyyy-mm-dd): ")
 	# create a new cursor object
 	cursorObj = db.cursor()
 	# use .execute to run a SQL INSERT command
-	cursorObj.execute("INSERT INTO " + table + " VALUES(1, 'Joe Schmoe', 120000, 'Engineering', 'Lead Engineer', '2015-11-15')")
+	cursorObj.execute("INSERT INTO " + table + " VALUES(?, ?, ?, ?, ?, ?)", (empId, name, salary, dept, position, hireDate))
 	# commit the changes to the database
 	db.commit()
+
+def table_size(db):
+	cursorObj = db.cursor()
+	cursorObj.execute("SELECT * FROM employees")
+	rows = cursorObj.fetchall()
+	return len(rows)
 
 # making our method calls:
 my_db = sql_connection() # database connected
