@@ -1,0 +1,45 @@
+(*) = choice
+(-) = action
+(+) = action steps
+
+Main Menu {1}
+	* Make a Database (2)
+	* Modify a Database (3)
+	* End ()
+
+Make a Database {2}
+	- create a database
+		+ user input: database name
+		+ run SQL command to create database
+	* Modify This Database (3)
+	* Create Another Database (2)
+	* Main Menu (1)
+
+Modify a Database {3}
+	* Create New Table (4)
+	* Choose Existing Table (5)
+
+Create a Table {4}
+	- create a table
+		+ user input: table name, column names & datatypes
+		+ combine column names/datatypes into a string
+		+ run SQL command to create table
+	* Modify This Table (6)
+	* Create Another Table (4)
+	* Main Menu (1)
+
+Choose Existing Table {5}
+	- SQL command to collect table names
+	- user input: choose a table
+	* Add Data to Table (6)
+
+Add Data to Table {6}
+	- get data from user
+		+ SQL command to collect column names
+		+ gather user input for each column
+	- run SQL command to input data into table
+	(repeat until user is done inputting) ~ loop until user says 'done'
+	* Modify Another Table in This Database (3)
+	* Main Menu (1)
+
+

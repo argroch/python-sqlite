@@ -3,18 +3,19 @@
 import sqlite3
 import os
 
-# A method to establish a connection to our database
+# A method to establish a connection to a database;
 # will create database file if none exists
 def sql_connection(db):
 	connection = sqlite3.connect(db)
-	# connection = sqlite3.connect('mydatabase.db')
 	return connection
 
 # A method to create a table within the database
 # database is passed as a parameter
-def create_table(db, cursorObj):
+def create_table(db, cursorObj, table_name, fields):
 	# the .execute() method (pre-written) takes SQL commands as a parameter and runs (executes) it
-	cursorObj.execute("CREATE TABLE IF NOT EXISTS employees(id integer PRIMARY KEY, name text, salary real, department text, position text, hireDate text)")
+	# cursorObj.execute("CREATE TABLE IF NOT EXISTS employees(id integer PRIMARY KEY, name text, salary real, department text, position text, hireDate text)")
+
+	cursorObj.execute("CREATE TABLE IF NOT EXISTS " + table_name + " (" + fields + ");")
 	# then we'll use .commit() method to save to the database
 	db.commit()
 
